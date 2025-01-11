@@ -240,23 +240,6 @@ export default function Hero3D() {
               </div>
             </motion.div>
 
-            <div className="flex gap-4 mt-6">
-              <a 
-                href="/resume.pdf" 
-                download
-                className="flex items-center gap-2 px-6 py-3 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition-colors"
-              >
-                <FaDownload />
-                Download CV
-              </a>
-              <a 
-                href="#projects" 
-                className="px-6 py-3 border-2 border-gray-200 dark:border-gray-700 rounded-lg hover:border-indigo-500 dark:hover:border-indigo-500 transition-colors"
-              >
-                View Projects
-              </a>
-            </div>
-
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
