@@ -9,27 +9,28 @@ import { HiDocumentDownload, HiChevronDown } from 'react-icons/hi'
 import { SiTypescript, SiTailwindcss, SiNextdotjs, SiPython, SiDocker } from 'react-icons/si'
 
 function Stars({ count = 5000 }) {
-  const [positions] = useState(() => {
-    const positions = []
-    for (let i = 0; i < count; i++) {
-      positions.push(
-        (Math.random() - 0.5) * 50,
-        (Math.random() - 0.5) * 50,
-        (Math.random() - 0.5) * 50
-      )
-    }
-    return new Float32BufferAttribute(positions, 3)
-  })
-
   const points = useRef<any>()
   
+  // Create positions array once
+  const [positions] = useState(() => {
+    const positions = new Float32Array(count * 3)
+    for (let i = 0; i < count; i++) {
+      positions[i * 3] = (Math.random() - 0.5) * 50
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 50
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 50
+    }
+    return positions
+  })
+
   useFrame((state) => {
-    points.current.rotation.x += 0.0001
-    points.current.rotation.y += 0.0001
+    if (points.current) {
+      points.current.rotation.x += 0.0001
+      points.current.rotation.y += 0.0001
+    }
   })
 
   return (
-    <Points ref={points} positions={positions} stride={3} frustumCulled={false}>
+    <Points ref={points} positions={positions}>
       <PointMaterial
         transparent
         color="#8b5cf6"
